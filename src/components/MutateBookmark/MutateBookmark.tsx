@@ -137,7 +137,7 @@ export const MutateBookmark = ({
   return (
     <form onSubmit={handleSubmit(submit)} style={{ width: "100%" }}>
       <Stack vertical gap={8}>
-        <H0 style={{ fontSize: "14px" }}>
+        <H0>
           {type} {objectName}
         </H0>
         <InputWithTitle
