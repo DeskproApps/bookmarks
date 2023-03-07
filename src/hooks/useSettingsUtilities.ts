@@ -4,7 +4,7 @@ import {
 } from "@deskpro/app-sdk";
 import { IBookmark } from "../types/bookmarks";
 
-type Props = {
+type ReturnValues = {
   getBookmarks: () => IBookmark[];
   getParentFolders: () => IBookmark[];
   addBookmark: (bookmark: IBookmark) => void;
@@ -13,7 +13,7 @@ type Props = {
   removeBookmark: (bookmarkId: string) => void;
 };
 
-export const useSettingsUtilities = (): Props | null => {
+export const useSettingsUtilities = (): ReturnValues | null => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext();
 
