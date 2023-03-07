@@ -1,6 +1,6 @@
 import { Icon, P3, P8, Stack } from "@deskpro/app-sdk";
 import { useSettingsUtilities } from "../../../hooks/useSettingsUtilities";
-import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragListAdmin";
+import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragList";
 import { faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { IBookmark } from "../../../types/bookmarks";
 import { StyledLink } from "../../../styles";
