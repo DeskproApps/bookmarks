@@ -9,7 +9,7 @@ export const HorizontalDivider = () => {
     <HorizontalDividerSDK
       style={{
         width: "100vw",
-        color: theme.colors.grey10,
+        color: theme?.colors.grey10,
         marginBottom: "10px",
       }}
     />
