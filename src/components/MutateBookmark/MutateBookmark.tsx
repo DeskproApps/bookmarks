@@ -1,5 +1,5 @@
 import { Button, H0, Stack } from "@deskpro/app-sdk";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidV4 } from "uuid";
 import { useSettingsUtilities } from "../../hooks/useSettingsUtilities";
@@ -113,26 +113,29 @@ export const MutateBookmark = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
-  if (!bookmarkUtilities) return <></>;
+  const submit = useCallback(
+    (data: IBookmark) => {
+      if (!bookmarkUtilities) return;
 
-  const submit = (data: IBookmark) => {
-    if (!bookmarkUtilities) return;
+      if (objectName === "Folder") {
+        data.isFolder = true;
+      }
 
-    if (objectName === "Folder") {
-      data.isFolder = true;
-    }
+      if (type === "Add") {
+        bookmarkUtilities.addBookmark(data);
 
-    if (type === "Add") {
-      bookmarkUtilities.addBookmark(data);
+        setPageSettings(null);
 
+        return;
+      }
+
+      bookmarkUtilities.editBookmark(data);
       setPageSettings(null);
+    },
+    [bookmarkUtilities, objectName, type, setPageSettings]
+  );
 
-      return;
-    }
-
-    bookmarkUtilities.editBookmark(data);
-    setPageSettings(null);
-  };
+  if (!bookmarkUtilities) return <></>;
 
   return (
     <form onSubmit={handleSubmit(submit)} style={{ width: "100%" }}>
