@@ -34,7 +34,7 @@ export const useSettingsUtilities = (): ReturnValues | null => {
     );
 
   const getBookmarks = (): IBookmark[] => {
-    return JSON.parse(context.settings.bookmarks);
+    return JSON.parse(context.settings.bookmarks ?? "[]");
   };
 
   const getParentFolders = () => {
