@@ -1,11 +1,15 @@
-import { HorizontalDivider as HorizontalDividerSDK } from "@deskpro/app-sdk";
+import {
+  HorizontalDivider as HorizontalDividerSDK,
+  useDeskproAppTheme,
+} from "@deskpro/app-sdk";
 
 export const HorizontalDivider = () => {
+  const { theme } = useDeskproAppTheme();
   return (
     <HorizontalDividerSDK
       style={{
-        width: "110%",
-        color: "#EFF0F0",
+        width: "100vw",
+        color: theme.colors.grey10,
         marginBottom: "10px",
       }}
     />

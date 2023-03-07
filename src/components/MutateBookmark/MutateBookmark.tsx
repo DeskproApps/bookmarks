@@ -164,9 +164,7 @@ export const MutateBookmark = ({
               title="Description"
               data-testid="input-Description"
               error={!!errors.Description}
-              register={register("Description", {
-                required: true,
-              })}
+              register={register("Description")}
             ></InputWithTitle>
             <DropdownSelect
               title="Parent Folder"

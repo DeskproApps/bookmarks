@@ -8,6 +8,7 @@ import {
   H1,
   Stack,
   P3,
+  DropdownItemType,
 } from "@deskpro/app-sdk";
 import {
   faCheck,
@@ -34,7 +35,7 @@ type Props = {
   required?: boolean;
 };
 export const DropdownSelect = ({
-  data,
+  data = [],
   onChange,
   title,
   value,
@@ -45,8 +46,8 @@ export const DropdownSelect = ({
 }: Props) => {
   // This works fine but the types are completely wrong
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dataOptions = useMemo<any>(() => {
-    return data?.map((dataInList) => ({
+  const dataOptions = useMemo<DropdownItemType<Status>[]>(() => {
+    return data.map((dataInList) => ({
       key: dataInList[labelName],
       label: <Label label={dataInList[labelName]}></Label>,
       value: dataInList[valueName],
@@ -71,8 +72,9 @@ export const DropdownSelect = ({
         autoscrollText={"Autoscroll"}
         selectedIcon={faCheck}
         externalLinkIcon={faExternalLinkAlt}
-        // @ts-ignore
-        onSelectOption={(option) => onChange(option.value)}
+        onSelectOption={(option) =>
+          onChange((option as unknown as { value: string }).value)
+        }
       >
         {({ targetProps, targetRef }: DropdownTargetProps<HTMLDivElement>) => (
           <DivAsInput
