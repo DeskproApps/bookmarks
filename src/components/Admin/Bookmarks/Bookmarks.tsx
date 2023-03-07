@@ -1,6 +1,6 @@
 import { Icon, P3, P8, Stack } from "@deskpro/app-sdk";
 import { useSettingsUtilities } from "../../../hooks/useSettingsUtilities";
-import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragList";
+import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragListAdmin";
 import { faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { IBookmark } from "../../../types/bookmarks";
 import { StyledLink } from "../../../styles";
@@ -31,9 +31,13 @@ export const Bookmarks = ({ setPageSettings }: Props) => {
           e.Name
         ) : (
           <Stack gap={8}>
-            <P3>- {e.Name}</P3>
+            <P3>
+              - {e.Name.length > 25 ? `${e.Name.substring(0, 25)}...` : e.Name}
+            </P3>
             <StyledLink to={e.URL} target="_blank" style={{ marginTop: "1px" }}>
-              <P8>({e.URL.substring(0, 65)}...)</P8>
+              <P8>
+                ({e.URL.length > 45 ? `${e.URL.substring(0, 45)}...` : e.URL})
+              </P8>
             </StyledLink>
           </Stack>
         )
