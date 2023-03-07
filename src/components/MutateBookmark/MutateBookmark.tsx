@@ -141,6 +141,7 @@ export const MutateBookmark = ({
           {type} {objectName}
         </H0>
         <InputWithTitle
+          data-testid="input-Name"
           title="Name"
           error={!!errors.Name}
           register={register("Name", {
@@ -152,6 +153,7 @@ export const MutateBookmark = ({
             <InputWithTitle
               title="URL"
               error={!!errors.URL}
+              data-testid="input-URL"
               register={register("URL", {
                 required: true,
                 // eslint-disable-next-line no-useless-escape
@@ -160,6 +162,7 @@ export const MutateBookmark = ({
             ></InputWithTitle>
             <InputWithTitle
               title="Description"
+              data-testid="input-Description"
               error={!!errors.Description}
               register={register("Description", {
                 required: true,
@@ -180,7 +183,12 @@ export const MutateBookmark = ({
           </Stack>
         )}
         <Stack justify="space-between" style={{ width: "100%" }}>
-          <Button intent="primary" text={type} type="submit"></Button>
+          <Button
+            intent="primary"
+            text={type}
+            type="submit"
+            data-testid="button-submit"
+          ></Button>
           <Button
             intent="secondary"
             text="Cancel"

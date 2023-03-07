@@ -187,6 +187,7 @@ function TreeList<T>({
               onMouseEnter={() =>
                 onMouseEnter((option.data as { Id: string }).Id)
               }
+              key={index}
               onMouseLeave={onMouseLeave}
             >
               {!option.children ? (

@@ -34,6 +34,7 @@ export const Admin = () => {
           intent="secondary"
           text="Bookmark"
           disabled={!!pageSettings}
+          data-testid="button-add-bookmark"
           onClick={() => {
             setPageSettings({
               type: "Add",
