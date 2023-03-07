@@ -32,11 +32,11 @@ export const Bookmarks = ({ setPageSettings }: Props) => {
         ) : (
           <Stack gap={8}>
             <P3>
-              - {e.Name.length > 25 ? `${e.Name.substring(0, 25)}...` : e.Name}
+              - {e.Name.length > 21 ? `${e.Name.substring(0, 21)}...` : e.Name}
             </P3>
-            <StyledLink to={e.URL} target="_blank" style={{ marginTop: "1px" }}>
+            <StyledLink to={e.URL} target="_blank" style={{ marginTop: "2px" }}>
               <P8>
-                ({e.URL.length > 45 ? `${e.URL.substring(0, 45)}...` : e.URL})
+                ({e.URL.length > 41 ? `${e.URL.substring(0, 41)}...` : e.URL})
               </P8>
             </StyledLink>
           </Stack>

@@ -117,7 +117,13 @@ function TreeNode<T>({
               </S.ItemDraggableHandle>
               <Stack justify={"space-between"} style={{ width: "100%" }}>
                 <Stack>
-                  <P3>
+                  <P3
+                    style={{
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                    }}
+                  >
                     {labelAccessor(
                       option.data,
                       option.depth,
@@ -217,35 +223,50 @@ function TreeList<T>({
                           option.depth,
                           snapshot.isDragging
                         ) !== "Root" && (
-                          <S.ItemContainer
-                            role="listitem"
-                            isDragging={snapshot.isDragging}
+                          <Stack
+                            onMouseEnter={() =>
+                              onMouseEnter(
+                                (option.data as unknown as { Id: string }).Id
+                              )
+                            }
                           >
-                            <S.ItemDraggableHandle
-                              {...provided.dragHandleProps}
+                            <S.ItemContainer
+                              role="listitem"
+                              isDragging={snapshot.isDragging}
                             >
-                              <LegacyIcon />
-                            </S.ItemDraggableHandle>
-                            <Stack
-                              style={{
-                                width: "100%",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <Stack>
-                                <P3>
-                                  {labelAccessor(
-                                    option.data,
-                                    option.depth,
-                                    snapshot.isDragging
-                                  )}
-                                </P3>
+                              <S.ItemDraggableHandle
+                                {...provided.dragHandleProps}
+                              >
+                                <LegacyIcon />
+                              </S.ItemDraggableHandle>
+                              <Stack
+                                style={{
+                                  width: "100%",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <Stack>
+                                  <P3
+                                    style={{
+                                      textOverflow: "ellipsis",
+                                      whiteSpace: "nowrap",
+                                      overflow: "hidden",
+                                    }}
+                                  >
+                                    {labelAccessor(
+                                      option.data,
+                                      option.depth,
+                                      snapshot.isDragging
+                                    )}
+                                  </P3>
+                                </Stack>
+                                <Stack>
+                                  {actionAccessor &&
+                                    actionAccessor(option.data)}
+                                </Stack>
                               </Stack>
-                              <Stack>
-                                {actionAccessor && actionAccessor(option.data)}
-                              </Stack>
-                            </Stack>
-                          </S.ItemContainer>
+                            </S.ItemContainer>
+                          </Stack>
                         )}
                         <TreeList
                           idAccessor={idAccessor}
