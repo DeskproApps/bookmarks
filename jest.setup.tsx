@@ -22,6 +22,7 @@ jest.mock("@deskpro/app-sdk", () => ({
   useDeskproAppClient: () => ({
     client: {
       setAdminSetting: (data: string) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         setting = data;
       },
     },

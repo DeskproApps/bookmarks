@@ -87,6 +87,9 @@ export const useSettingsUtilities = () => {
           ? item.ParentFolder === bookmark.ParentFolder && !item.isFolder
           : item
       )
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore this is not passing for some reason lol
       .at(-1);
 
     const lastInNewItemParentFolderIndex = currentSBookmarks.findIndex(

@@ -185,7 +185,7 @@ function TreeList<T>({
           {tree.map((option, index) => (
             <Stack
               onMouseEnter={() =>
-                onMouseEnter((option.data as { Id: string }).Id)
+                onMouseEnter((option.data as unknown as { Id: string }).Id)
               }
               key={index}
               onMouseLeave={onMouseLeave}
