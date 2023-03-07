@@ -19,11 +19,22 @@ export const useSettingsUtilities = (): ReturnValues | null => {
 
   if (!client || !context) return null;
 
-  const getBookmarks = (): IBookmark[] => {
-    return JSON.parse(
-      context.settings.bookmarks ||
-        '[{"Id": "f238cf6d-eb4e-4873-99b9-fb5c2443820c", "Name": "Root", "URL": "", "Description": "", "ParentFolder": null, "isFolder": true}]'
+  if (!context.settings.bookmarks)
+    client.setAdminSetting(
+      JSON.stringify([
+        {
+          Id: "f238cf6d-eb4e-4873-99b9-fb5c2443820c",
+          Name: "Root",
+          URL: "",
+          Description: "",
+          ParentFolder: null,
+          isFolder: true,
+        },
+      ])
     );
+
+  const getBookmarks = (): IBookmark[] => {
+    return JSON.parse(context.settings.bookmarks);
   };
 
   const getParentFolders = () => {
@@ -124,7 +135,22 @@ export const useSettingsUtilities = (): ReturnValues | null => {
     } else {
       currentBookmarks.splice(currentBookmarkIndex, 1);
 
-      addBookmark(bookmark);
+      const lastInNewItemParentFolder = currentBookmarks
+        .filter((item) =>
+          !bookmark.isFolder
+            ? item.ParentFolder === bookmark.ParentFolder && !item.isFolder
+            : item
+        )
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore this is not passing for some reason lol
+        .at(-1);
+
+      const lastInNewItemParentFolderIndex = currentBookmarks.findIndex(
+        (e) => e.Id === (lastInNewItemParentFolder?.Id || bookmark.ParentFolder)
+      );
+
+      currentBookmarks.splice(lastInNewItemParentFolderIndex + 1, 0, bookmark);
     }
 
     client.setAdminSetting(JSON.stringify(currentBookmarks));

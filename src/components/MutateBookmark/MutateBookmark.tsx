@@ -186,7 +186,7 @@ export const MutateBookmark = ({
         <Stack justify="space-between" style={{ width: "100%" }}>
           <Button
             intent="primary"
-            text={type}
+            text={type === "Edit" ? "Save" : type}
             type="submit"
             data-testid="button-submit"
           ></Button>

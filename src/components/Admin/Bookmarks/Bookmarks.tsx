@@ -65,7 +65,8 @@ export const Bookmarks = ({ setPageSettings }: Props) => {
         )
       }
       actionAccessor={(object: IBookmark) =>
-        (currentHovered as unknown as string) === object.Id && (
+        (currentHovered as unknown as string) === object.Id &&
+        object.Name !== "You currently have no Bookmarks" && (
           <Stack gap={5} style={{ marginTop: "4px", cursor: "pointer" }}>
             <Stack
               onClick={() =>
