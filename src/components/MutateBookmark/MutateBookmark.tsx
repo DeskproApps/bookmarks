@@ -183,7 +183,10 @@ export const MutateBookmark = ({
             ></DropdownSelect>
           </Stack>
         )}
-        <Stack justify="space-between" style={{ width: "100%" }}>
+        <Stack
+          justify="space-between"
+          style={{ width: "100%", padding: "1px" }}
+        >
           <Button
             intent="primary"
             text={type === "Edit" ? "Save" : type}
