@@ -44,8 +44,14 @@ export const DropdownSelect = ({
   valueName,
   required,
 }: Props) => {
-  // This works fine but the types are completely wrong
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const a = () => {
+    document.querySelector(".simplebar-placeholder")?.remove();
+
+    return {
+      a: 1,
+    };
+  };
+
   const dataOptions = useMemo<DropdownItemType<Status>[]>(() => {
     return data.map((dataInList) => ({
       key: dataInList[labelName],
@@ -78,6 +84,7 @@ export const DropdownSelect = ({
       >
         {({ targetProps, targetRef }: DropdownTargetProps<HTMLDivElement>) => (
           <DivAsInput
+            {...a()}
             error={error}
             ref={targetRef}
             {...targetProps}
