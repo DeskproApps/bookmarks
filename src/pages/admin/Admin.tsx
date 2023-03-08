@@ -1,23 +1,27 @@
-import { Button, P3, Stack } from "@deskpro/app-sdk";
-import { useEffect, useMemo, useState } from "react";
+import {
+  Button,
+  P3,
+  Stack,
+  useInitialisedDeskproAppClient,
+} from "@deskpro/app-sdk";
+import { useMemo, useState } from "react";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { MutateBookmark } from "../../components/MutateBookmark/MutateBookmark";
 import { HorizontalDivider } from "../../components/HorizontalDivider/HorizontalDivider";
 import { Bookmarks } from "../../components/Admin/Bookmarks/Bookmarks";
 
 export const Admin = () => {
-  const [rerendered, setRerendered] = useState(false);
   const [pageSettings, setPageSettings] = useState<{
     type: "Add" | "Edit";
     objectName: "Bookmark" | "Folder";
     objectId?: string;
   } | null>(null);
   //need to force a page refresh because of the iframe resizer
-  useEffect(() => {
-    if (!rerendered) {
-      setRerendered(true);
-    }
-  }, [rerendered]);
+
+  useInitialisedDeskproAppClient((client) => {
+    client.setWidth(500);
+    client.setHeight(200);
+  }, []);
 
   const page = useMemo(() => {
     if (!pageSettings) return;
