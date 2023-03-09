@@ -1,4 +1,4 @@
-# Xero App Setup
+# Bookmarks App Setup
 
 To install the Bookmarks App, all you need to do is go on the Settings page of the App and Install.
 
