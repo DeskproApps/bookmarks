@@ -1,29 +1,26 @@
 {
-  "name": "@deskpro-apps/my-app",
-  "title": "My App",
-  "description": "My Deskpro app",
-  "version": "0.0.0",
+  "name": "@deskpro-apps/bookmarks",
+  "title": "Bookmarks",
+  "description": "Effortlessly save and organize your favorite web pages with the bookmark app.",
+  "version": "1.0.0",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [{
-    "target": "ticket_sidebar",
-    "entrypoint": "index.html"
-  }],
-  "settings": {
-    "example": {
-      "title": "Example Setting",
-      "description": "Example backend only setting",
-      "type": "string",
-      "isRequired": false,
-      "isBackendOnly": true
+  "targets": [
+    {
+      "target": "global",
+      "entrypoint": "index.html"
     }
-  },
-  "proxy": {
-    "whitelist": [{
-      "url": "https://jsonplaceholder.typicode.com/.*",
-      "methods": ["GET"],
-      "timeout": 20
-    }]
+  ],
+  "settings": {
+    "bookmarks": {
+      "title": "",
+      "type": "app_embedded",
+      "options": {
+        "entrypoint": "#/admin"
+      },
+      "isRequired": true,
+      "isBackendOnly": false
+    }
   }
 }
