@@ -1,4 +1,5 @@
-import { Icon, P3, P8, Stack, Tooltip } from "@deskpro/app-sdk";
+import { Tooltip } from "@deskpro/deskpro-ui";
+import { Icon, P3, P8, Stack } from "@deskpro/app-sdk";
 import { useSettingsUtilities } from "../../../hooks/useSettingsUtilities";
 import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragList";
 import { faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -37,14 +38,14 @@ export const Bookmarks = ({ setPageSettings }: Props) => {
         ) : (
           <Stack gap={8}>
             <P3>
-              -{e.ParentFolder !== (rootFolder as IBookmark).Id ? "-" : ""}{" "}
+              {e.ParentFolder !== (rootFolder as IBookmark).Id ? "-" : ""}{" "}
               {e.Name.length > 21 ? `${e.Name.substring(0, 21)}...` : e.Name}
             </P3>
             <StyledLink to={e.URL} target="_blank" style={{ marginTop: "2px" }}>
               <Tooltip
                 content={e.URL}
                 placement="top"
-                styleType="dark"
+                styleType="lightBox"
                 styledCss={{ padding: "5px" }}
               >
                 <P8>
