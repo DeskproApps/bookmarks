@@ -1,6 +1,7 @@
 import { Button, H0, Stack } from "@deskpro/app-sdk";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import { useSettingsUtilities } from "../../hooks/useSettingsUtilities";
 import { IBookmark } from "../../types/bookmarks";
@@ -8,16 +9,16 @@ import { DropdownSelect } from "../DropdownSelect/DropdownSelect";
 import { InputWithTitle } from "../InputWithTitle/InputWithTitle";
 type Props = {
   type: "Add" | "Edit";
-  objectId?: string;
-  folderName?: string;
+  objectId?: string | null;
   objectName: string;
-  setPageSettings: (
+  setPageSettings?: (
     obj: {
       type: "Add" | "Edit";
       objectName: "Bookmark" | "Folder";
       objectId?: string;
     } | null
   ) => void;
+  page: 0 | 1;
 };
 
 type InputType = {
@@ -33,8 +34,9 @@ export const MutateBookmark = ({
   objectId,
   objectName,
   setPageSettings,
+  page,
 }: Props) => {
-  const bookmarkUtilities = useSettingsUtilities();
+  const bookmarkUtilities = useSettingsUtilities(page);
   const [gotParentFolder, setGotParentFolder] = useState<boolean>(false);
   const [parentFolders, setParentFolders] = useState<
     {
@@ -42,11 +44,14 @@ export const MutateBookmark = ({
       label: string;
     }[]
   >([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!bookmarkUtilities || gotParentFolder) return;
 
     const parentFoldersFromFunc = bookmarkUtilities.getParentFolders();
+
+    if (parentFoldersFromFunc.length === 0) return;
 
     setParentFolders([
       ...parentFoldersFromFunc.map((e) => ({
@@ -79,7 +84,7 @@ export const MutateBookmark = ({
   useEffect(() => {
     if (objectName !== "Folder") return;
 
-    const folders = bookmarkUtilities?.getParentFolders();
+    const folders = bookmarkUtilities?.bookmarks;
 
     setValue(
       "ParentFolder",
@@ -91,9 +96,7 @@ export const MutateBookmark = ({
   useEffect(() => {
     if (type !== "Edit" || !objectId || !bookmarkUtilities) return;
 
-    const bookmark = bookmarkUtilities
-      .getBookmarks()
-      .find((e) => e.Id === objectId);
+    const bookmark = bookmarkUtilities.bookmarks.find((e) => e.Id === objectId);
 
     reset(bookmark);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -124,15 +127,16 @@ export const MutateBookmark = ({
       if (type === "Add") {
         bookmarkUtilities.addBookmark(data);
 
-        setPageSettings(null);
+        setPageSettings ? setPageSettings(null) : navigate(-1);
 
         return;
       }
 
       bookmarkUtilities.editBookmark(data);
-      setPageSettings(null);
+
+      setPageSettings ? setPageSettings(null) : navigate(-1);
     },
-    [bookmarkUtilities, objectName, type, setPageSettings]
+    [bookmarkUtilities, objectName, type, setPageSettings, navigate]
   );
 
   if (!bookmarkUtilities) return <></>;
@@ -196,7 +200,9 @@ export const MutateBookmark = ({
           <Button
             intent="secondary"
             text="Cancel"
-            onClick={() => setPageSettings(null)}
+            onClick={() =>
+              setPageSettings ? setPageSettings(null) : navigate(-1)
+            }
           ></Button>
         </Stack>
       </Stack>

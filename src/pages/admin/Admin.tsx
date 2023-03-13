@@ -31,6 +31,7 @@ export const Admin = () => {
         type={pageSettings.type}
         setPageSettings={setPageSettings}
         objectId={pageSettings.objectId}
+        page={0}
       />
     );
   }, [pageSettings]);

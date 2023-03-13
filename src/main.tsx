@@ -5,12 +5,15 @@ import App from "./App";
 import { DeskproAppProvider } from "@deskpro/app-sdk";
 
 import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
+import { BookmarkProvider } from "./context/bookmarkContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
     <DeskproAppProvider>
-      <App />
+      <BookmarkProvider>
+        <App />
+      </BookmarkProvider>
     </DeskproAppProvider>
   </React.StrictMode>
 );
