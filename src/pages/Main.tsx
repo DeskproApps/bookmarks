@@ -103,7 +103,7 @@ export const Main = () => {
   const tabs = bookmarkUtilities.bookmarks || [];
 
   return (
-    <Stack vertical style={{ margin: "5px" }}>
+    <Stack vertical style={{ margin: page === 0 ? "8px" : "12px" }}>
       <div style={{ width: "100%" }}>
         <TwoButtonGroup
           selected={
@@ -135,7 +135,7 @@ export const Main = () => {
           return e.isFolder ? (
             <P4 style={{ marginBottom: "8px" }}>{e.Name}</P4>
           ) : (
-            <Stack vertical>
+            <Stack gap={8} vertical>
               <Stack gap={8} align={"center"}>
                 {icons.data && !e.isFolder && (
                   <img
@@ -176,8 +176,16 @@ export const Main = () => {
           )
         }
         actionAccessor={(object: IBookmark) =>
-          (currentHovered as unknown as string) === object.Id && (
-            <Stack gap={5} style={{ marginTop: "4px", cursor: "pointer" }}>
+          (currentHovered as unknown as string) === object.Id &&
+          (currentHovered as unknown as string) !== "1" && (
+            <Stack
+              gap={5}
+              style={{
+                marginTop: "4px",
+                marginRight: "5px",
+                cursor: "pointer",
+              }}
+            >
               <Stack
                 onClick={() =>
                   setPageSettings({

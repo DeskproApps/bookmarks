@@ -133,7 +133,10 @@ function TreeNode({
                 >
                   <LegacyIcon isShared={isShared} />
                 </S.ItemDraggableHandle>
-                <Stack justify={"space-between"} style={{ width: "100%" }}>
+                <Stack
+                  justify={"space-between"}
+                  style={{ width: "100%", marginLeft: "5px" }}
+                >
                   <Stack>
                     <P3>
                       {labelAccessor(
@@ -279,6 +282,7 @@ function TreeList({
                               style={{
                                 width: "100%",
                                 justifyContent: "space-between",
+                                marginLeft: "5px",
                               }}
                             >
                               <Stack>

@@ -5,6 +5,7 @@ import {
 import { useEffect } from "react";
 import { useBookmarks } from "../context/bookmarkContext";
 import { IBookmark } from "../types/bookmarks";
+import { DEFAULT_ROOT_ID } from "../utils/utils";
 
 export type SettingsUtilitiesReturnValues = {
   bookmarks: IBookmark[];
@@ -27,7 +28,7 @@ export const useSettingsUtilities = (
     (async () => {
       if (!context || !client) return;
       const defaultRoot = {
-        Id: "f238cf6d-eb4e-4873-99b9-fb5c2443820c",
+        Id: DEFAULT_ROOT_ID,
         Name: "Root",
         URL: "",
         Description: "",
@@ -71,7 +72,7 @@ export const useSettingsUtilities = (
     return localBookmarks.filter((e) => e.isFolder);
   };
 
-  const moveBookmark = (bookmarkId: string, newIndex: number) => {
+  const moveBookmark = async (bookmarkId: string, newIndex: number) => {
     const currentBookmarks = localBookmarks;
 
     const currentBookmarkIndex = currentBookmarks.findIndex(
@@ -126,10 +127,10 @@ export const useSettingsUtilities = (
       );
     }
 
-    setBookmarks(currentBookmarks);
+    await setBookmarks(currentBookmarks);
   };
 
-  const addBookmark = (bookmark: IBookmark) => {
+  const addBookmark = async (bookmark: IBookmark) => {
     const currentBookmarks = localBookmarks;
 
     const parent = currentBookmarks.find((b) => b.Id === bookmark.ParentFolder);
@@ -155,10 +156,10 @@ export const useSettingsUtilities = (
       currentBookmarks.splice(lastInNewItemParentFolderIndex + 1, 0, bookmark);
     }
 
-    setBookmarks(currentBookmarks);
+    await setBookmarks(currentBookmarks);
   };
 
-  const editBookmark = (bookmark: IBookmark) => {
+  const editBookmark = async (bookmark: IBookmark) => {
     const currentBookmarks = localBookmarks;
 
     const currentBookmarkIndex = currentBookmarks.findIndex(
@@ -190,10 +191,10 @@ export const useSettingsUtilities = (
       currentBookmarks.splice(lastInNewItemParentFolderIndex + 1, 0, bookmark);
     }
 
-    setBookmarks(currentBookmarks);
+    await setBookmarks(currentBookmarks);
   };
 
-  const removeBookmark = (bookmarkId: string) => {
+  const removeBookmark = async (bookmarkId: string) => {
     const currentBookmarks = localBookmarks;
 
     const index = currentBookmarks.findIndex((b) => b.Id === bookmarkId);
@@ -209,7 +210,7 @@ export const useSettingsUtilities = (
     } else {
       currentBookmarks.splice(index, 1);
     }
-    setBookmarks(currentBookmarks);
+    await setBookmarks(currentBookmarks);
   };
 
   return {
