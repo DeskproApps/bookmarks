@@ -229,6 +229,7 @@ function TreeList({
           ref={provided.innerRef}
           isDragging={snapshot.isDraggingOver && listId !== topLevelId}
           {...provided.droppableProps}
+          style={{ width: "100%" }}
         >
           {tree.map((option, index) => (
             <Stack
@@ -239,7 +240,7 @@ function TreeList({
               onMouseLeave={onMouseLeave}
             >
               {!option.children ? (
-                <Stack style={{ width: "97vw" }}>
+                <Stack style={{ width: "96vw" }}>
                   <TreeNode
                     options={options}
                     key={idAccessor(option.data)}
@@ -410,28 +411,30 @@ export function HierarchicalDragList({
   );
 
   return (
-    <DragDropContext
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-      key={options.length} // Force a rerender when options change - fixes a D&D bug for newly added (unsaved) options
-    >
-      <Stack style={{ width: "485px" }}>
-        <TreeList
-          options={options}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          idAccessor={idAccessor} // It refuses to stretch to 100% width ^^
-          labelAccessor={labelAccessor}
-          actionAccessor={actionAccessor}
-          parentIdAccessor={parentIdAccessor}
-          tree={tree}
-          listId={topLevelId}
-          activeId={activeId}
-          activeParentId={activeParentId}
-          parentOnly={parentOnly}
-          isShared={isShared}
-        />
-      </Stack>
-    </DragDropContext>
+    <div style={{ width: "100%" }}>
+      <DragDropContext
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        key={options.length} // Force a rerender when options change - fixes a D&D bug for newly added (unsaved) options
+      >
+        <Stack>
+          <TreeList
+            options={options}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            idAccessor={idAccessor} // It refuses to stretch to 100% width ^^
+            labelAccessor={labelAccessor}
+            actionAccessor={actionAccessor}
+            parentIdAccessor={parentIdAccessor}
+            tree={tree}
+            listId={topLevelId}
+            activeId={activeId}
+            activeParentId={activeParentId}
+            parentOnly={parentOnly}
+            isShared={isShared}
+          />
+        </Stack>
+      </DragDropContext>
+    </div>
   );
 }

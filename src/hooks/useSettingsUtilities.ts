@@ -15,6 +15,8 @@ export type SettingsUtilitiesReturnValues = {
   moveBookmark: (bookmarkId: string, newIndex: number) => void;
   removeBookmark: (bookmarkId: string) => void;
   setBookmarks: (bookmarks: IBookmark[]) => void;
+  getCurrentPage: () => Promise<number>;
+  setCurrentPage: (page: number) => void;
 };
 
 export const useSettingsUtilities = (
@@ -213,6 +215,16 @@ export const useSettingsUtilities = (
     await setBookmarks(currentBookmarks);
   };
 
+  const getCurrentPage = async () => {
+    const currentPage = (await client.getUserState("page"))[0]?.data as number;
+
+    return currentPage;
+  };
+
+  const setCurrentPage = async (page: number) => {
+    await client.setUserState("page", page);
+  };
+
   return {
     getParentFolders,
     addBookmark,
@@ -221,5 +233,7 @@ export const useSettingsUtilities = (
     removeBookmark,
     setBookmarks,
     bookmarks: localBookmarks,
+    getCurrentPage,
+    setCurrentPage,
   };
 };

@@ -42,11 +42,22 @@ export const Main = () => {
   } | null>(null);
 
   const [page, setPage] = useState<0 | 1>(1);
+  const [hasSetPage, setHasSetPage] = useState(false);
   const [currentHovered, setCurrentHovered] = useState<string | null>(null);
   const navigate = useNavigate();
   const { setLocalBookmarks } = useBookmarks();
 
   const bookmarkUtilities = useSettingsUtilities(page);
+
+  useEffect(() => {
+    if (!bookmarkUtilities || hasSetPage) return;
+
+    (async () => {
+      setPage((await bookmarkUtilities.getCurrentPage()) as 0 | 1);
+
+      setHasSetPage(true);
+    })();
+  }, [bookmarkUtilities, hasSetPage]);
 
   const icons = useQueryWithClient(
     ["Icons", bookmarkUtilities?.bookmarks as unknown as string],
@@ -118,10 +129,12 @@ export const Main = () => {
           twoLabel="My Bookmarks"
           oneOnClick={() => {
             setLocalBookmarks([]);
+            bookmarkUtilities.setCurrentPage(0);
             setPage(0);
           }}
           twoOnClick={() => {
             setLocalBookmarks([]);
+            bookmarkUtilities.setCurrentPage(1);
             setPage(1);
           }}
         ></TwoButtonGroup>
@@ -182,8 +195,9 @@ export const Main = () => {
               gap={5}
               style={{
                 marginTop: "4px",
-                marginRight: "5px",
                 cursor: "pointer",
+                position: "absolute",
+                right: "8px",
               }}
             >
               <Stack
