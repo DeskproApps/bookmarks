@@ -17,6 +17,11 @@ global.React = React;
 let setting =
   '[{"Id": "f238cf6d-eb4e-4873-99b9-fb5c2443820c", "Name": "Root", "URL": "", "Description": "", "ParentFolder": null, "isFolder": true}]';
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => jest.fn(),
+}));
+
 jest.mock("@deskpro/app-sdk", () => ({
   ...jest.requireActual("@deskpro/app-sdk"),
   useDeskproAppClient: () => ({

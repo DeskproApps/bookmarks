@@ -39,6 +39,7 @@ specifiers:
   react-dom: ^18.2.0
   react-error-boundary: ^3.1.4
   react-hook-form: ^7.43.2
+  react-resize-observer: ^1.1.1
   react-router-dom: ^6.8.2
   rimraf: ^3.0.2
   rollup-plugin-copy: 3.4.0
@@ -63,6 +64,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 3.1.4_react@18.2.0
   react-hook-form: 7.43.2_react@18.2.0
+  react-resize-observer: 1.1.1_react@18.2.0
   react-router-dom: 6.8.2_react-dom@18.2.0+react@18.2.0
   uuid: 9.0.0
 
@@ -4660,6 +4662,14 @@ packages:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-resize-observer/1.1.1_react@18.2.0:
+    resolution: {integrity: sha512-3R+90Hou90Mr3wJYc+unsySC8Pn91V4nmjO32NKvUvjphRUbq9HisyLg7bDyGBE7xlMrrM6Fax7iNQaFdc/FYA==}
+    peerDependencies:
+      react: '>=0.14'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react-router-dom/6.8.2_react-dom@18.2.0+react@18.2.0:
     resolution: {integrity: sha512-N/oAF1Shd7g4tWy+75IIufCGsHBqT74tnzHQhbiUTYILYF0Blk65cg+HPZqwC+6SqEyx033nKqU7by38v3lBZg==}
