@@ -24,12 +24,36 @@ jest.mock("react-router-dom", () => ({
 
 jest.mock("@deskpro/app-sdk", () => ({
   ...jest.requireActual("@deskpro/app-sdk"),
+  useQueryWithClient: (queryKey: string, queryFn: () => any, options: any) => {
+    queryKey;
+    options;
+    if (!options || options?.enabled == null || options?.enabled == true) {
+      return {
+        isSuccess: true,
+        data: queryFn(),
+        isLoading: false,
+      };
+    }
+    return {
+      isSuccess: false,
+      data: null,
+      isLoading: false,
+    };
+  },
   useDeskproAppClient: () => ({
     client: {
       setAdminSetting: (data: string) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         setting = data;
       },
+      getUserState: () =>
+        new Promise((resolve) =>
+          resolve([
+            {
+              data: "[{}]",
+            },
+          ])
+        ),
     },
   }),
   useDeskproAppEvents: (
