@@ -2,7 +2,6 @@ lockfileVersion: 5.3
 
 specifiers:
   '@deskpro/app-sdk': 1.2.11
-  '@deskpro/deskpro-ui': ^6.3.1
   '@hello-pangea/dnd': ^16.2.0
   '@heroicons/react': 1.0.6
   '@jest/globals': ^29.3.1
@@ -52,7 +51,6 @@ specifiers:
 
 dependencies:
   '@deskpro/app-sdk': 1.2.11_45719ea55af201dd921157d6e694b571
-  '@deskpro/deskpro-ui': 6.3.1_e411952371d0cb7a1cdbc78413ecc9c1
   '@hello-pangea/dnd': 16.2.0_2de669f829b0fcfe0ace744644a19aca
   '@heroicons/react': 1.0.6_react@18.2.0
   '@tanstack/react-query': 4.26.1_react-dom@18.2.0+react@18.2.0
@@ -577,43 +575,6 @@ packages:
       '@tippyjs/react': 4.2.6_react-dom@18.2.0+react@18.2.0
       '@typescript/lib-dom': /@types/web/0.0.86
       csstype: 3.1.0
-      formik: 2.2.9_react@18.2.0
-      framer-motion: 6.5.1_react-dom@18.2.0+react@18.2.0
-      pretty-bytes: 6.0.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-highlight-words: 0.17.0_react@18.2.0
-      react-is: 17.0.2
-      react-popper: 2.3.0_8fa1dcc48dc335937d24f9cc8f7f819a
-      simplebar: 5.3.9
-      simplebar-react: 2.4.3_react-dom@18.2.0+react@18.2.0
-      styled-components: 5.3.6_react-dom@18.2.0+react@18.2.0
-      tippy.js: 6.3.7
-      ts-pattern: 4.1.2
-      tslib: 2.4.1
-      type-fest: 2.19.0
-      use-debounce: 7.0.1_react@18.2.0
-      uuid: 8.3.2
-    dev: false
-
-  /@deskpro/deskpro-ui/6.3.1_e411952371d0cb7a1cdbc78413ecc9c1:
-    resolution: {integrity: sha512-21wf4LzYiKNX7Qak9QX4Dhm3pIvMDDLN+EB30T9PfRFjh2NxRxsEnMycgeVN+MdMw8RDLheJkEfPp6sMQ3QzBQ==}
-    engines: {node: ^16.0.0}
-    peerDependencies:
-      '@typescript/lib-dom': npm:@types/web
-      react: ^18
-      react-dom: ^18
-      styled-components: ^5
-    dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.2.1
-      '@fortawesome/free-solid-svg-icons': 6.2.1
-      '@fortawesome/react-fontawesome': 0.1.19_cebe167be39b298c5652d6c4a48e22a6
-      '@heroicons/react': 1.0.6_react@18.2.0
-      '@popperjs/core': 2.11.6
-      '@tippyjs/react': 4.2.6_react-dom@18.2.0+react@18.2.0
-      '@typescript/lib-dom': /@types/web/0.0.86
-      csstype: 3.1.0
-      d3-hierarchy: 3.1.2
       formik: 2.2.9_react@18.2.0
       framer-motion: 6.5.1_react-dom@18.2.0+react@18.2.0
       pretty-bytes: 6.0.0

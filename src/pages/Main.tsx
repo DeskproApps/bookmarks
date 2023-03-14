@@ -38,7 +38,7 @@ export const Main = () => {
     objectId?: string | null;
   } | null>(null);
 
-  const [page, setPage] = useState<0 | 1>(1);
+  const [page, setPage] = useState<0 | 1>(0);
   const [hasSetPage, setHasSetPage] = useState(false);
   const [currentHovered, setCurrentHovered] = useState<string | null>(null);
   const navigate = useNavigate();
