@@ -52,7 +52,7 @@ export const Main = () => {
     if (!bookmarkUtilities?.bookmarks) return null;
 
     return bookmarkUtilities?.bookmarks.map((e) => {
-      if (e.isFolder) return null;
+      if (!e.URL || e.isFolder) return null;
 
       return new URL(e.URL).host.replace("www.", "");
     });
