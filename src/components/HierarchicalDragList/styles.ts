@@ -84,7 +84,6 @@ export const ItemContainer = styled.div<{
   ${(props) => (props.isShared == null ? `padding: 4px 16px;` : ``)}
 
   font-family: ${lightTheme.fonts.primary};
-  font-size: 12px;
   line-height: 1.5em;
   display: flex;
   align-items: center;
