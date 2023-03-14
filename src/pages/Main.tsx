@@ -10,25 +10,30 @@ import {
   TwoButtonGroup,
   useQueryWithClient,
 } from "@deskpro/app-sdk";
-import { useEffect, useState } from "react";
 import {
-  faUserGroup,
-  faPencil,
-  faTrashCan,
   faCircleUser,
+  faPencil,
   faPlus,
+  faTrashCan,
+  faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import isSvg from "is-svg";
+import isPng from "is-png";
+//lib does not have types
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+import isJpg from "is-jpg";
 import { HierarchicalDragList } from "../components/HierarchicalDragList/HierarchicalDragListGlobal";
+import { useBookmarks } from "../context/bookmarkContext";
 import {
   SettingsUtilitiesReturnValues,
   useSettingsUtilities,
 } from "../hooks/useSettingsUtilities";
 import { StyledLink } from "../styles";
 import { IBookmark } from "../types/bookmarks";
-import { useNavigate } from "react-router-dom";
-import { useBookmarks } from "../context/bookmarkContext";
 
-import isSvg from "is-svg";
 import { PAGEICON } from "../utils/utils";
 
 export const Main = () => {
@@ -56,7 +61,12 @@ export const Main = () => {
     })();
   }, [bookmarkUtilities, hasSetPage]);
 
-  const icons = useQueryWithClient(
+  const icons = useQueryWithClient<
+    {
+      text: string;
+      type: "svg" | "png" | "jpg";
+    }[]
+  >(
     ["Icons", bookmarkUtilities?.bookmarks as unknown as string],
     (client) => {
       return Promise.allSettled(
@@ -69,16 +79,22 @@ export const Main = () => {
             const icon = await fetch(
               new URL(bookmark.URL).origin + "/favicon.ico"
             ).then(async (e) => {
-              if (!e.ok) return PAGEICON;
+              if (!e.ok) return { text: PAGEICON, type: "svg" };
 
               const text = await e.text();
 
-              if (!isSvg(text)) return PAGEICON;
-
-              return text;
+              if (isSvg(text)) {
+                return { text, type: "svg+xml" };
+              } else if (isPng(new TextEncoder().encode(text))) {
+                return { text, type: "png" };
+              } else if (isJpg(text)) {
+                return { text, type: "jpeg" };
+              } else {
+                return { text: PAGEICON, type: "svg" };
+              }
             });
 
-            return btoa(icon);
+            return icon;
           }
         )
 
@@ -152,9 +168,9 @@ export const Main = () => {
                 {icons.data && !e.isFolder && (
                   <img
                     style={{ width: "14px" }}
-                    src={`data:image/svg+xml;base64,${
-                      icons.data[tabs.indexOf(e)]
-                    }`}
+                    src={`data:image/${
+                      icons.data[tabs.indexOf(e)].type
+                    };base64,${btoa(icons.data[tabs.indexOf(e)].text)}`}
                   />
                 )}
                 <StyledLink to={e.URL} target="_blank">
