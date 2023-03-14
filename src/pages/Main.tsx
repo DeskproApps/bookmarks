@@ -5,36 +5,23 @@ import {
   P1,
   P3,
   P4,
-  proxyFetch,
   Stack,
   TwoButtonGroup,
-  useQueryWithClient,
 } from "@deskpro/app-sdk";
+import { useEffect, useMemo, useState } from "react";
 import {
-  faCircleUser,
-  faPencil,
-  faPlus,
-  faTrashCan,
   faUserGroup,
+  faPencil,
+  faTrashCan,
+  faCircleUser,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import isSvg from "is-svg";
-import isPng from "is-png";
-//lib does not have types
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
-import isJpg from "is-jpg";
 import { HierarchicalDragList } from "../components/HierarchicalDragList/HierarchicalDragListGlobal";
-import { useBookmarks } from "../context/bookmarkContext";
-import {
-  SettingsUtilitiesReturnValues,
-  useSettingsUtilities,
-} from "../hooks/useSettingsUtilities";
+import { useSettingsUtilities } from "../hooks/useSettingsUtilities";
 import { StyledLink } from "../styles";
 import { IBookmark } from "../types/bookmarks";
-
-import { PAGEICON } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
+import { useBookmarks } from "../context/bookmarkContext";
 
 export const Main = () => {
   const [pageSettings, setPageSettings] = useState<{
@@ -61,51 +48,15 @@ export const Main = () => {
     })();
   }, [bookmarkUtilities, hasSetPage]);
 
-  const icons = useQueryWithClient<
-    {
-      text: string;
-      type: "svg" | "png" | "jpg";
-    }[]
-  >(
-    ["Icons", bookmarkUtilities?.bookmarks as unknown as string],
-    (client) => {
-      return Promise.allSettled(
-        (bookmarkUtilities as SettingsUtilitiesReturnValues).bookmarks.map(
-          async (bookmark) => {
-            if (bookmark.isFolder) return null;
+  const icons = useMemo(() => {
+    if (!bookmarkUtilities?.bookmarks) return null;
 
-            const fetch = await proxyFetch(client);
+    return bookmarkUtilities?.bookmarks.map((e) => {
+      if (e.isFolder) return null;
 
-            const icon = await fetch(
-              new URL(bookmark.URL).origin + "/favicon.ico"
-            ).then(async (e) => {
-              if (!e.ok) return { text: PAGEICON, type: "svg" };
-
-              const text = await e.text();
-
-              if (isSvg(text)) {
-                return { text, type: "svg+xml" };
-              } else if (isPng(new TextEncoder().encode(text))) {
-                return { text, type: "png" };
-              } else if (isJpg(text)) {
-                return { text, type: "jpeg" };
-              } else {
-                return { text: PAGEICON, type: "svg" };
-              }
-            });
-
-            return icon;
-          }
-        )
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore e.value is valid
-      ).then((e) => e.map((e) => e.value));
-    },
-    {
-      enabled: !!bookmarkUtilities?.bookmarks,
-    }
-  );
+      return new URL(e.URL).host.replace("www.", "");
+    });
+  }, [bookmarkUtilities?.bookmarks]);
 
   useEffect(() => {
     if (!pageSettings) return;
@@ -117,11 +68,7 @@ export const Main = () => {
     );
   }, [navigate, pageSettings]);
 
-  if (
-    icons.isLoading ||
-    !bookmarkUtilities ||
-    bookmarkUtilities?.bookmarks.length === 0
-  )
+  if (!bookmarkUtilities || bookmarkUtilities?.bookmarks.length === 0)
     return <LoadingSpinner></LoadingSpinner>;
 
   const tabs = bookmarkUtilities.bookmarks || [];
@@ -165,12 +112,12 @@ export const Main = () => {
           ) : (
             <Stack gap={8} vertical>
               <Stack gap={8} align={"center"}>
-                {icons.data && !e.isFolder && (
+                {icons && !e.isFolder && (
                   <img
                     style={{ width: "14px" }}
-                    src={`data:image/${
-                      icons.data[tabs.indexOf(e)].type
-                    };base64,${btoa(icons.data[tabs.indexOf(e)].text)}`}
+                    src={`https://www.google.com/s2/favicons?domain=${
+                      icons[tabs.indexOf(e)]
+                    }`}
                   />
                 )}
                 <StyledLink to={e.URL} target="_blank">
