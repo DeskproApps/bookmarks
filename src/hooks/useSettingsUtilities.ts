@@ -29,6 +29,7 @@ export const useSettingsUtilities = (
   useEffect(() => {
     (async () => {
       if (!context || !client) return;
+
       const defaultRoot = {
         Id: DEFAULT_ROOT_ID,
         Name: "Root",
@@ -37,6 +38,7 @@ export const useSettingsUtilities = (
         ParentFolder: null,
         isFolder: true,
       };
+
       if (page === 0) {
         if (!context.settings.bookmarks) {
           client.setAdminSetting(JSON.stringify([defaultRoot]));
@@ -50,6 +52,10 @@ export const useSettingsUtilities = (
 
         if (!bookmarksUserState) {
           client.setUserState("bookmarks", JSON.stringify([defaultRoot]));
+
+          setLocalBookmarks([defaultRoot]);
+
+          return;
         }
 
         setLocalBookmarks(JSON.parse(bookmarksUserState));
@@ -217,6 +223,12 @@ export const useSettingsUtilities = (
 
   const getCurrentPage = async () => {
     const currentPage = (await client.getUserState("page"))[0]?.data as number;
+
+    if (!currentPage) {
+      await client.setUserState("page", 0);
+
+      return 0;
+    }
 
     return currentPage;
   };
