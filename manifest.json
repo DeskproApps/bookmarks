@@ -22,16 +22,5 @@
       "isRequired": true,
       "isBackendOnly": false
     }
-  },
-  "proxy": {
-    "whitelist": [
-      {
-        "url": "https://www.google.com/s2/favicons?domain=.*",
-        "methods": [
-          "GET"
-        ],
-        "timeout": 30
-      }
-    ]
   }
 }
