@@ -1,7 +1,7 @@
 import { Tooltip } from "@deskpro/deskpro-ui";
 import { Icon, P3, P8, Stack } from "@deskpro/app-sdk";
 import { useSettingsUtilities } from "../../../hooks/useSettingsUtilities";
-import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragList";
+import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragListAdmin";
 import { faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { IBookmark } from "../../../types/bookmarks";
 import { StyledLink } from "../../../styles";
@@ -18,16 +18,16 @@ interface Props {
 export const Bookmarks = ({ setPageSettings }: Props) => {
   const [currentHovered, setCurrentHovered] = useState<string | null>(null);
 
-  const bookmarkUtilities = useSettingsUtilities();
+  const bookmarkUtilities = useSettingsUtilities(0);
 
   const rootFolder = useMemo(
-    () => bookmarkUtilities?.getBookmarks()?.find((e) => e.Name === "Root"),
+    () => bookmarkUtilities?.bookmarks?.find((e) => e.Name === "Root"),
     [bookmarkUtilities]
   );
 
   if (!bookmarkUtilities) return <></>;
 
-  const tabs = bookmarkUtilities.getBookmarks() || [];
+  const tabs = bookmarkUtilities.bookmarks || [];
 
   return (
     <HierarchicalDragList

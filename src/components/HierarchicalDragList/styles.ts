@@ -76,12 +76,14 @@ export const IconWrapper = styled.span`
   }
 `;
 
-export const ItemContainer = styled.div<{ isDragging: boolean }>`
+export const ItemContainer = styled.div<{
+  isDragging: boolean;
+  isShared?: boolean;
+}>`
   box-sizing: border-box;
-  padding: 4px 16px;
-  height: 28px;
+  ${(props) => (props.isShared == null ? `padding: 4px 16px;` : ``)}
+
   font-family: ${lightTheme.fonts.primary};
-  font-size: 12px;
   line-height: 1.5em;
   display: flex;
   align-items: center;
@@ -90,17 +92,21 @@ export const ItemContainer = styled.div<{ isDragging: boolean }>`
     isDragging ? theme.colors.white : "transparent"};
   box-shadow: ${({ isDragging }) =>
     isDragging ? "0px 2px 8px rgba(0, 0, 0, 0.15);" : "0"};
-  :hover {
-    background-color: ${(props) => props.theme.colors.grey10};
-    ${ItemActions} {
-      display: flex;
+  ${(props) => {
+    if (props.isShared == null) {
+      return `  :hover {
+        background-color: ${props.theme.colors.grey10};
+        ${ItemActions} {
+        display: flex;
+        }`;
     }
+  }}
   }
 `;
 
 export const ItemDraggableHandle = styled.div`
   color: ${({ theme }) => theme.colors.grey100};
-  margin-right: 10px;
+  margin-right: 5px;
   display: flex;
   align-items: center;
   svg {

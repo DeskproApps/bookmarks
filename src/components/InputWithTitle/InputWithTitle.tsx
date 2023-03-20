@@ -36,6 +36,7 @@ export const InputWithTitle = ({
           fontWeight: 500,
           fontSize: "12px",
           resize: "none",
+          height: title === "Description" ? "100px" : "",
           ...style,
         }}
         placeholder={`Enter ${type === "number" ? "number" : "value"}`}

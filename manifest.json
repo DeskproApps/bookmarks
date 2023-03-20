@@ -1,7 +1,7 @@
 {
   "name": "@deskpro-apps/bookmarks",
   "title": "Bookmarks",
-  "description": "Effortlessly save and organize your favorite web pages with the bookmark app.",
+  "description": "Effortlessly save and organize your must have web pages with the Bookmarks App.",
   "version": "1.0.0",
   "scope": "agent",
   "isSingleInstall": false,
