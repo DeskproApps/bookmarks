@@ -14,6 +14,7 @@ import * as S from "./styles";
 import { HorizontalDivider } from "../HorizontalDivider/HorizontalDivider";
 import { IBookmark } from "../../types/bookmarks";
 import { useDeskproAppTheme } from "@deskpro/app-sdk";
+import { findLastIndex } from "../../utils/utils";
 
 const LegacyIcon = ({ isShared }: { isShared?: boolean }) => {
   return isShared ? (
@@ -158,9 +159,9 @@ function TreeNode({
           (findIndexBookmark) => findIndexBookmark.Id === option.data.Id
         );
         if (option.data.isFolder) return;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        const lastItemParentFolder = options.findLastIndex(
+
+        const lastItemParentFolder = findLastIndex(
+          options,
           (lastItem: IBookmark) =>
             lastItem.ParentFolder === option.data.ParentFolder
         );
