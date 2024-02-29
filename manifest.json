@@ -12,7 +12,7 @@
     "bookmarks": {
       "title": "",
       "type": "app_embedded",
-      "options": { "entrypoint": "#/admin" },
+      "options": { "entrypoint": "http://localhost:3000/#/admin" },
       "isRequired": true,
       "isBackendOnly": false
     }

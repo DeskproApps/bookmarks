@@ -14,8 +14,8 @@ function App() {
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Routes>
             <Route index path="/" element={<Main />} />
-            <Route path="admin" element={<Admin />}></Route>
-            <Route path="edit" element={<Edit />}></Route>
+            <Route path="admin" element={<Admin />}/>
+            <Route path="edit" element={<Edit />}/>
           </Routes>
         </ErrorBoundary>
       </QueryClientProvider>
