@@ -1,4 +1,4 @@
-import { P3, Stack, TextArea } from "@deskpro/app-sdk";
+import { P3, Stack, TextArea } from "@deskpro/deskpro-ui";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface Props {

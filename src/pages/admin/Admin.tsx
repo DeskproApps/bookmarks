@@ -1,9 +1,5 @@
-import {
-  Button,
-  P3,
-  Stack,
-  useInitialisedDeskproAppClient,
-} from "@deskpro/app-sdk";
+import { P3, Stack, Button } from "@deskpro/deskpro-ui";
+import { useInitialisedDeskproAppClient } from "@deskpro/app-sdk";
 import { useMemo, useState } from "react";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { MutateBookmark } from "../../components/MutateBookmark/MutateBookmark";

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   DivAsInput,
   Dropdown as DropdownComponent,
@@ -9,7 +7,7 @@ import {
   Stack,
   P3,
   DropdownItemType,
-} from "@deskpro/app-sdk";
+} from "@deskpro/deskpro-ui";
 import {
   faCheck,
   faExternalLinkAlt,
@@ -25,6 +23,7 @@ interface Status {
 }
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: any[];
   onChange: (key: string) => void;
   title: string;

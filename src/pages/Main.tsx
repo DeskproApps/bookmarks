@@ -1,11 +1,6 @@
+import { P1, P3, P4, Stack, Icon, Button } from "@deskpro/deskpro-ui";
 import {
-  Button,
-  Icon,
   LoadingSpinner,
-  P1,
-  P3,
-  P4,
-  Stack,
   TwoButtonGroup,
 } from "@deskpro/app-sdk";
 import { useEffect, useMemo, useState } from "react";
