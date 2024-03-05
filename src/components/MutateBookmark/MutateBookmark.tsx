@@ -1,4 +1,4 @@
-import { Button, H0, Stack } from "@deskpro/app-sdk";
+import { Button, H0, Stack } from "@deskpro/deskpro-ui";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -164,7 +164,7 @@ export const MutateBookmark = ({
               register={register("URL", {
                 required: true,
                 // eslint-disable-next-line no-useless-escape
-                pattern: /^https:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/,
+                pattern: /^https?:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/,
               })}
             ></InputWithTitle>
             <InputWithTitle

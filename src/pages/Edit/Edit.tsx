@@ -1,4 +1,4 @@
-import { Stack } from "@deskpro/app-sdk";
+import { Stack } from "@deskpro/deskpro-ui";
 import { useSearchParams } from "react-router-dom";
 import { MutateBookmark } from "../../components/MutateBookmark/MutateBookmark";
 

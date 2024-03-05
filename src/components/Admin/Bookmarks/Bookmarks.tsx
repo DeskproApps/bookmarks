@@ -1,5 +1,5 @@
 import { Tooltip } from "@deskpro/deskpro-ui";
-import { Icon, P3, P8, Stack } from "@deskpro/app-sdk";
+import { Icon, P3, P8, Stack } from "@deskpro/deskpro-ui";
 import { useSettingsUtilities } from "../../../hooks/useSettingsUtilities";
 import { HierarchicalDragList } from "../../HierarchicalDragList/HierarchicalDragListAdmin";
 import { faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons";
