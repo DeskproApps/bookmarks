@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { DeskproAppProvider } from "@deskpro/app-sdk";
 
+import "iframe-resizer/js/iframeResizer.contentWindow.js";
 import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
 import { BookmarkProvider } from "./context/bookmarkContext";
 
