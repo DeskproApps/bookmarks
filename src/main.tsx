@@ -11,12 +11,12 @@ import { Scrollbar } from "@deskpro/deskpro-ui";
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
-    <Scrollbar style={{ height: "100%", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <DeskproAppProvider>
         <BookmarkProvider>
           <App />
         </BookmarkProvider>
       </DeskproAppProvider>
-    </Scrollbar>
+    </div>
   </React.StrictMode>
 );

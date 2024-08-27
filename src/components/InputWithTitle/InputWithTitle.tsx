@@ -20,7 +20,7 @@ export const InputWithTitle = ({
   ...attributes
 }: Props) => {
   return (
-    <Stack vertical style={{ width: "98%", marginTop: "5px" }}>
+    <Stack vertical style={{ width: "100%", marginTop: "5px" }}>
       <Stack>
         <P3>{title}</P3>
         {required && (
