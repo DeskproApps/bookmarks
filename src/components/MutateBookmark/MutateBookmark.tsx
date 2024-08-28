@@ -189,7 +189,7 @@ export const MutateBookmark = ({
         )}
         <Stack
           justify="space-between"
-          style={{ width: "100%", padding: "1px" }}
+          style={{ width: "100%", padding: "1px", boxSizing: "border-box" }}
         >
           <Button
             intent="primary"

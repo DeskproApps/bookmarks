@@ -7,7 +7,7 @@
   "isSingleInstall": false,
   "hasDevMode": true,
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
-  "targets": [{ "target": "global", "entrypoint": "index.html" }],
+  "targets": [{ "target": "global", "entrypoint": "index.html", "options": { "height": 450 } }],
   "settings": {
     "bookmarks": {
       "title": "",

@@ -14,7 +14,7 @@ export const Edit = () => {
   if (!type || !objectName) return <></>;
 
   return (
-    <Stack style={{ margin: "8px" }}>
+    <Stack style={{ padding: "8px" }}>
       <MutateBookmark
         type={type as "Add" | "Edit"}
         objectName={objectName}

@@ -61,7 +61,7 @@ export const DropdownSelect = ({
   }, [data, valueName, labelName]);
 
   return (
-    <Stack vertical style={{ marginTop: "5px", width: "100%" }}>
+    <Stack vertical style={{ marginTop: "5px", width: "99%" }}>
       <Stack>
         <P3>{title}</P3>
         {required && (

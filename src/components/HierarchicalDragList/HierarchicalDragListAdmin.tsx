@@ -197,7 +197,7 @@ function TreeList<T>({
               onMouseLeave={onMouseLeave}
             >
               {!option.children ? (
-                <Stack style={{ width: "97vw" }}>
+                <Stack style={{ width: "100%" }}>
                   <TreeNode
                     key={idAccessor(option.data)}
                     idAccessor={idAccessor}
@@ -381,7 +381,7 @@ export function HierarchicalDragList<T>({
       key={options.length} // Force a rerender when options change - fixes a D&D bug for newly added (unsaved) options
     >
       <S.ListContainerRoot>
-        <Stack style={{ width: "485px" }}>
+        <Stack style={{ width: "100%" }}>
           <TreeList
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}

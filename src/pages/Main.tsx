@@ -69,7 +69,7 @@ export const Main = () => {
   const tabs = bookmarkUtilities.bookmarks || [];
 
   return (
-    <Stack vertical style={{ margin: page === 0 ? "8px" : "12px" }}>
+    <Stack vertical style={{ padding: page === 0 ? "8px" : "12px" }}>
       <div style={{ width: "100%" }}>
         <TwoButtonGroup
           selected={
