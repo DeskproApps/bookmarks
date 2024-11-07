@@ -19,25 +19,25 @@ export type SettingsUtilitiesReturnValues = {
   setCurrentPage: (page: number) => void;
 };
 
+const defaultRoot = {
+  Id: DEFAULT_ROOT_ID,
+  Name: "Root",
+  URL: "",
+  Description: "",
+  ParentFolder: null,
+  isFolder: true,
+} as const;
+
 export const useSettingsUtilities = (
   page: number
 ): SettingsUtilitiesReturnValues | null => {
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext<unknown, { bookmarks?: string }>();
   const { localBookmarks, setLocalBookmarks } = useBookmarks();
 
   useEffect(() => {
     (async () => {
       if (!context || !client) return;
-
-      const defaultRoot = {
-        Id: DEFAULT_ROOT_ID,
-        Name: "Root",
-        URL: "",
-        Description: "",
-        ParentFolder: null,
-        isFolder: true,
-      };
 
       if (page === 0) {
         if (!context.settings.bookmarks) {
@@ -45,7 +45,7 @@ export const useSettingsUtilities = (
 
           return;
         }
-        setLocalBookmarks(JSON.parse(context.settings.bookmarks as string));
+        setLocalBookmarks(JSON.parse(context.settings.bookmarks));
       } else if (page === 1) {
         const bookmarksUserState = (await client.getUserState("bookmarks"))[0]
           ?.data as string;
@@ -127,9 +127,9 @@ export const useSettingsUtilities = (
 
       currentBookmarks.splice(
         newNewIndexGeneral +
-          (currentBookmarkIndex > newIndexGeneral
-            ? 0
-            : 1 + childrenOfMovableItem),
+        (currentBookmarkIndex > newIndexGeneral
+          ? 0
+          : 1 + childrenOfMovableItem),
         0,
         ...allItems
       );
