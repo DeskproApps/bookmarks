@@ -4,7 +4,7 @@ import {
 } from "@deskpro/app-sdk";
 import { useEffect } from "react";
 import { useBookmarks } from "../context/bookmarkContext";
-import { IBookmark } from "../types/bookmarks";
+import { IBookmark, BookmarkContext } from "../types/bookmarks";
 import { DEFAULT_ROOT_ID } from "../utils/utils";
 
 export type SettingsUtilitiesReturnValues = {
@@ -23,7 +23,7 @@ export const useSettingsUtilities = (
   page: number
 ): SettingsUtilitiesReturnValues | null => {
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext();
+  const { context } = useDeskproLatestAppContext() as { context?: BookmarkContext };
   const { localBookmarks, setLocalBookmarks } = useBookmarks();
 
   useEffect(() => {
@@ -40,12 +40,12 @@ export const useSettingsUtilities = (
       };
 
       if (page === 0) {
-        if (!context.settings.bookmarks) {
+        if (!context.settings?.bookmarks) {
           client.setAdminSetting(JSON.stringify([defaultRoot]));
 
           return;
         }
-        setLocalBookmarks(JSON.parse(context.settings.bookmarks as string));
+        setLocalBookmarks(JSON.parse(context.settings.bookmarks));
       } else if (page === 1) {
         const bookmarksUserState = (await client.getUserState("bookmarks"))[0]
           ?.data as string;
