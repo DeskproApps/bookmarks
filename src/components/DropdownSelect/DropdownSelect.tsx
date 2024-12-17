@@ -2,7 +2,6 @@ import {
   DivAsInput,
   Dropdown as DropdownComponent,
   DropdownTargetProps,
-  Label,
   H1,
   Stack,
   P3,
@@ -43,18 +42,10 @@ export const DropdownSelect = ({
   valueName,
   required,
 }: Props) => {
-  const a = () => {
-    document.querySelector(".simplebar-placeholder")?.remove();
-
-    return {
-      a: 1,
-    };
-  };
-
   const dataOptions = useMemo<DropdownItemType<Status>[]>(() => {
     return data.map((dataInList) => ({
       key: dataInList[labelName],
-      label: <Label label={dataInList[labelName]}></Label>,
+      label: dataInList[labelName],
       value: dataInList[valueName],
       type: "value" as const,
     }));
@@ -83,7 +74,6 @@ export const DropdownSelect = ({
       >
         {({ targetProps, targetRef }: DropdownTargetProps<HTMLDivElement>) => (
           <DivAsInput
-            {...a()}
             error={error}
             ref={targetRef}
             {...targetProps}
