@@ -12,8 +12,8 @@ export const Admin = () => {
     objectName: "Bookmark" | "Folder";
     objectId?: string;
   } | null>(null);
-  //need to force a page refresh because of the iframe resizer
 
+  //need to force a page refresh because of the iframe resizer
   useInitialisedDeskproAppClient((client) => {
     client.setWidth(500);
     client.setHeight(200);
