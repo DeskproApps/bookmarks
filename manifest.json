@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/bookmarks",
   "title": "Bookmarks",
   "description": "Effortlessly save and organize your must have web pages with the Bookmarks App.",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
