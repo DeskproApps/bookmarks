@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { lightTheme } from "@deskpro/deskpro-ui";
+import { DeskproAppTheme } from "@deskpro/app-sdk";
 
-export const ListContainerRoot = styled.div`
+export const ListContainerRoot = styled.div<DeskproAppTheme>`
   border: 1px solid ${({ theme }) => theme.colors.grey20};
   border-radius: 4px;
   box-sizing: border-box;
@@ -46,7 +47,7 @@ export const EditInput = styled.input`
 export const ListDropContainer = styled.div<{
   isDragging: boolean;
   topLevel: boolean;
-}>`
+} & DeskproAppTheme>`
   padding: ${(props) => (props.topLevel ? "8px 0px" : 0)};
   box-sizing: border-box;
   background-color: ${({ theme, isDragging }) =>
@@ -60,7 +61,7 @@ export const ItemActions = styled.span`
   }
 `;
 
-export const IconWrapper = styled.span`
+export const IconWrapper = styled.span<DeskproAppTheme>`
   display: flex;
   align-content: center;
   svg {
@@ -79,7 +80,7 @@ export const IconWrapper = styled.span`
 export const ItemContainer = styled.div<{
   isDragging: boolean;
   isShared?: boolean;
-}>`
+} & DeskproAppTheme>`
   box-sizing: border-box;
   ${(props) => (props.isShared == null ? `padding: 4px 16px;` : ``)}
 
@@ -104,7 +105,7 @@ export const ItemContainer = styled.div<{
   }
 `;
 
-export const ItemDraggableHandle = styled.div`
+export const ItemDraggableHandle = styled.div<DeskproAppTheme>`
   color: ${({ theme }) => theme.colors.grey100};
   margin-right: 5px;
   display: flex;
